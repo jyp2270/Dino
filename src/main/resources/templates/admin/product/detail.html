@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+th:replace="~{layout/layout1 :: layout(~{::head}, ~{::main})}">
+<head>
+	<link rel="stylesheet" href="/css/admin/product/detail.css">
+	<!-- <link rel="stylesheet" href="/css/admin/product/insertProduct.css">
+	<link rel="stylesheet" href="/css/admin/product/prodDetail.css"> -->
+	<link rel="stylesheet" href="/css/common/common.css">
+	<link rel="stylesheet" href="/css/common/reset.css">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- include summernote css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	<script src="/js/summernote.js"></script>
+	<script src="/js/fileUpload.js"></script>
+</head>
+<main>
+	<h1>상품 디테일 페이지</h1>
+	<div class="wrap">
+		<section id="prod-reg">
+		<h1>상품 리스트</h1>
+			<div class="wrap view-size">
+				<p class="go-list"><a href="#">상품 리스트</a></p>
+				<ul th:each="dto:${detail}">
+					<li  class="detail-top flex between">
+						<th:block  th:each="f : ${dto.files}" >
+						<img th:if="${f.isDefImg}" alt="이미지" height="550px" th:src="${f.url+f.orgName}">
+						</th:block>
+						<div class="i-info">
+						<ul>
+							<li id="prodName">[[${dto.prodName}]]</li>
+							<li id="c-prodPrice" style="text-decoration: line-through;"><label>소비자가</label>[[${dto.price}]] 원</li>
+							<li id="prodPrice"><label>판매가</label>[[${dto.price-dto.sale}]] 원</li>
+							<li id="info-color">
+								<label>> 색상</label>
+								<select id="op">
+								<option>-[필수]옵션을 선택해 주세요-</option>
+								</select>
+							</li>
+							<li id="info-size">
+								<label>> 사이즈</label>
+								<select id="op">
+								<option>-[필수]옵션을 선택해 주세요-</option>
+								</select>
+							</li>
+							<li id="Confirm">
+								<p>최소주문수량 1개 이상</p>
+								<table>
+									<thead>
+										<tr>
+											<td>상품명</td>
+											<td>상품수</td>
+											<td>가격</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>[[${dto.prodName}]]</td>
+											<td><input type="number" id="ea" value="1" min="1"></td>
+											<td id="price">[[${dto.price-dto.sale}]]</td>
+										</tr>
+									</tbody>
+								</table>
+							</li>
+							<li class="info-btn">
+								<span sec:authorize="isAuthenticated()">
+								<input type="hidden" id="buyerEmail" th:value="${#authentication.principal.email}">
+								<input type="hidden" id="buyerName" th:value="${#authentication.principal.name}">
+								</span>
+								<input type="hidden" id="ea-price" th:value="${dto.price-dto.sale}">
+								<input type="hidden" id="prodNo" th:value="${dto.prodNo}">
+								<input type="hidden" th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" >
+								<input type="hidden" id="isauth" th:value="${#authorization.expression('isAuthenticated()')}">
+								<button id="btn-payment" class="prodBtn">구매하기</button>
+								<button type="submit" id="btn-cart" class="prodBtn">장바구니</button>
+								<button id="btn-wish" class="prodBtn">관심상품</button>
+							</li>
+						</ul>
+						</div>
+						<script type="text/javascript">
+							$("#ea").change(function(){
+								$("#price").text($(this).val()*$("#ea-price").val());
+							});
+							
+							$("#btn-cart").click(function(){
+								if($("#isauth").val()=="false"){
+									if(confirm("로그인후 이용가능합니다. 로그인페이지 이동!")){
+										location.href="/signin";
+									}
+									return;
+								}
+								//장바구니로 저장
+								var token = $("meta[name='_csrf']").attr("content");
+		    	    			var header = $("meta[name='_csrf_header']").attr("content");
+		    	    			$.ajax({
+		    	    				beforeSend: function(xhr){xhr.setRequestHeader(header, token);},
+									url:"/products/carts",
+									type:"post",
+									data:{
+										prodNo:$("#prodNo").val(),
+										ea:$("#ea").val()
+										},
+									success:function(result){
+										if(result){
+											if(confirm("장바구니에 저장하였습니다.\n이동하시겠습니까?")){
+												location.href="/member/carts"
+											}
+										}else if(result=="update"){
+											if(confirm("기존 장바구니에 추가하였습니다.\n이동하시겠습니까?")){
+												location.href="/member/carts"
+											}
+										}
+									}
+								});
+							});
+						
+						</script>
+					</li>
+					<li class="detail-img">
+						<th:block  th:each="f : ${dto.files}" >
+						<img th:if="${f.isDefImg}" alt="이미지" height="100px" th:src="${f.url+f.orgName}">
+						<img th:unless="${f.isDefImg}" alt="이미지" height="100px" th:src="${f.url+f.orgName}">
+						</th:block>
+					</li>
+					<li class="detail-text">[(${dto.content})]</li>
+					
+				</ul>
+				<div>
+					
+				</div>
+			</div>
+		</section>
+	</div>
+</main>
+</html>

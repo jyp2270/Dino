@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+th:fragment="layout(head,main)" >
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DinoJi</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+	<!-- default header name is X-CSRF-TOKEN -->
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/admin-menu.js" type="text/javascript" defer="defer"></script>
+	<link rel="shortcut icon" href="/images/icon/코끼리이.ico">
+    <!-- 공통적용할 css -->
+    <link rel="stylesheet" href="/css/common/reset.css">
+    <link rel="stylesheet" href="/css/common/common.css">
+    <link rel="stylesheet" href="/css/common/layout-admin.css">
+    <link rel="stylesheet" href="/css/admin/visual/list.css">
+    <!-- summernote css/js -->
+    <th:block th:replace="${head}">page에서 설정한 head정보가 삽입되요</th:block>
+    
+</head>
+<body class="flex" id="container">
+	<header>
+		<h1>메뉴</h1>
+		<div class="wrap">
+			<div id="top">
+				<a href="/admin/home">ADMIN HOME</a>
+			</div>
+			<ul id="nav-v1">
+				<li class="menu-v1"><a href="#">비주얼 관리</a>
+					<ul class="submenu">
+						<li><a href="#">비주얼 관리</a></li>
+						<li><a href="/admin/visuals">리스트</a></li>
+						<li><a href="/admin/visuals/write">등록하기</a></li>
+					</ul>
+				</li>
+				<li class="menu-v1"><a href="#">상품관리</a>
+					<ul class="submenu">
+						<li><a href="/admin/products">상품 조회/수정</a></li>
+						<li><a href="/admin/products/insertProduct">상품 등록</a></li>
+						<li><a href="#">상품 일괄 등록</a></li>
+						<li><a href="#">카탈로그 가격관리</a></li>
+						<li><a href="#">연관상품 관리</a></li>
+						<li><a href="#">사진 보관함</a></li>
+						<li><a href="#">배송정보 관리</a></li>
+						<li><a href="#">템플릿 관리</a></li>
+						<li><a href="#">공지사항 관리</a></li>
+					</ul>
+				</li>
+				<li class="menu-v1"><a href="#">주문통합검색</a>
+					<ul class="submenu">
+						<li><a href="#">미결제 확인</a></li>
+						<li><a href="#">발주(주문)확인/발송과니리</a></li>
+						<li><a href="#">배송현황 관리</a></li>
+						<li><a href="#">구매확정 내역</a></li>
+						<li><a href="#">취소 관리</a></li>
+						<li><a href="#">반품 관리</a></li>
+						<li><a href="#">교환 관리</a></li>
+						<li><a href="#">판매방해 고객관리</a></li>
+					</ul>
+					
+				</li>
+				<li class="menu-v1"><a href="#">정산관리</a>
+					<ul class="submenu">
+						<li><a href="#">빠른 정산</a></li>
+						<li><a href="#">정산 내역</a></li>
+						<li><a href="#">정산 내역 상세</a></li>
+						<li><a href="#">부가세 신고 내역</a></li>
+						<li><a href="#">세금계산서 조회</a></li>
+					</ul>
+				</li>
+				<li class="menu-v1"><a href="#">문의/리뷰관리</a>
+					<ul class="submenu">
+						<li><a href="#">문의 관리</a></li>
+						<li><a href="#">고객 문의 관리</a></li>
+						<li><a href="#">리뷰 관리</a></li>
+						<li><a href="#">리뷰 이벤트 관리</a></li>
+					</ul>
+				</li>
+				<li class="menu-v1"><a href="#">톡톡상담관리</a>
+					<ul class="submenu">
+						<li><a href="#">톡톡 상담하기</a></li>
+						<li><a href="#">톡톡 쇼핑챗봇 /AI FAQ 설정</a></li>
+					</ul>
+				</li>
+				<li class="menu-v1"><a href="#">전시관리</a>
+					<ul class="submenu">
+						<li><a href="#">카테고리 관리</a></li>
+						<li><a href="#">스토어 관리</a></li>
+					</ul>
+				</li>
+				<li class="menu-v1"><a href="#">고객혜택관리</a>
+					<ul class="submenu">
+						<li><a href="#">혜택 등록</a></li>
+						<li><a href="#">혜택 조회/수정</a></li>
+						<li><a href="#">고객등급 관리</a></li>
+						<li><a href="#">포인트 지급내역 조회</a></li>
+					</ul>
+				</li>
+				<li class="menu-v1"><a href="#">통계</a>
+					<ul class="submenu">
+						<li><a href="#">요약</a></li>
+						<li><a href="#">판매분석</a></li>
+						<li><a href="#">고객 현황</a></li>
+						<li><a href="#">재구매 통계</a></li>
+					</ul>
+				</li>
+				<li class="menu-v1"><a href="#">판매자정보</a>
+					<ul class="submenu">
+						<li><a href="#">판매자정보</a></li>
+						<li><a href="#">매니저 관리</a></li>
+					</ul>
+				</li>
+				<li class="menu-v1"><a href="#">지식재산권침해관리</a>
+					<ul class="submenu">
+						<li><a href="#">리스트</a></li>
+						<li><a href="#">등록하기</a></li>
+					</ul>
+				</li>
+			</ul>
+			<div id="bottom">
+				<a href="/">HOME으로 이동</a>
+			</div>
+		</div>
+	</header>
+    <main th:replace="${main}">
+    	메인섹션이 삽입되는 영역입니다.
+    </main>
+</body>
+</html>

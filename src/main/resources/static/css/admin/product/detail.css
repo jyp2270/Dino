@@ -1,0 +1,158 @@
+@charset "EUC-KR";
+
+main{
+	width: 1024px;
+	margin: auto;
+}
+main > .wrap a{		/* 상품리스트 글씨 */
+	color: #000;
+}
+.wrap .go-list{
+	padding-top: 30px;
+	/* border-bottom: 1px solid #c0c0c0; */
+	margin: 0;
+}
+
+/* detail-top ==================================== */
+
+#prod-reg .wrap .detail-top{
+	padding: 10px 0 100px;
+	border-bottom: 1px solid #c0c0c0;
+}
+
+#prod-reg .wrap .detail-top img{	/* 이미지크기 지정 */
+	width: 55%;
+	height: auto;
+	
+}
+
+#prod-reg .wrap .detail-top .i-info{
+	width: 40%;
+}
+#prod-reg .wrap .detail-top .i-info ul li:not(:first-child){
+	padding-left: 8px;
+	font-size: 12px;
+}
+
+
+
+#prodName{
+	border-top: 2px solid #c0c0c0;
+	font-size: 28px;
+	padding: 8px 16px;
+}
+#c-prodPrice{
+	border-top: 1px solid #c0c0c0;
+	padding-top: 20px;
+}
+#c-prodPrice label{
+	margin-right: 60px;
+}
+#prodPrice{
+	padding: 20px 0;
+}
+#prodPrice label{
+	margin-right: 72px;
+}
+#info-color{
+	border-top: 1px solid #c0c0c0;
+	padding-top: 20px;
+}
+#info-color label{
+	margin-right: 72px;
+}
+.detail-top li #op{		/* option태그 길이 */
+	width: 68%;
+}
+#info-size{
+	padding: 20px 0;
+}
+#info-size label{
+	margin-right: 57px;
+}
+#Confirm{
+	padding: 10px 0;
+	border: 1px solid #c0c0c0;
+	border-right: 0;
+	border-left: 0;
+	margin: 10px 0;
+}
+
+.info-btn{
+	justify-content: space-between;
+}
+.info-btn button{
+	width: 32%;
+	height: 44px;
+	font-weight: bold;
+	border: 1px solid #c0c0c0;
+	border-radius: 1px;
+}
+.info-btn #btn-payment{
+	color: #000080;
+	background-color: #e7eefe;
+	border: 0;
+}
+#Confirm td:first-child{
+	width: 330px;
+}
+#Confirm td{
+	width: 90px;
+}
+
+
+
+/* detail-img ====================================== */
+
+.detail-img{
+	padding-top: 140px;
+}
+.detail-img img{
+	display: block;
+	padding-bottom: 60px;
+	margin: auto;
+	width: 70%;
+	height: auto;
+}
+.detail-text{
+	text-align: center;
+	font-size: 24px;
+}
+
+
+
+
+
+
+/* footer ===================================== */
+footer{
+	font-family: Malgun Gothic
+}
+#cus .wrap ul li h3{
+	color: #000;
+	font-weight: bold;
+	margin-top: 0;
+	font-size: 12px;
+	text-decoration: none;
+}
+#cus .wrap ul li p{
+	margin: 0;
+}
+#fnb > .wrap ul li{
+	position: relative;
+	top: 30%;
+}
+
+#com .wrap .com-info dl{
+	margin: 0;
+}
+#com .wrap .com-info dl dd address{
+	margin: 0;
+}
+#com .wrap .com-info dl dt{
+	font-weight: normal;
+}
+
+
+
+

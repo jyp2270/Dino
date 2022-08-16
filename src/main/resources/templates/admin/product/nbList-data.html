@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<p class="p-tit" style="margin-top: 100px;">NEW ARRIVAL</p>
+<ul class="grid-container">
+	<li th:each="dto: ${newList}" class="prods item">
+		<div class="prods img">
+			<a th:href="|/common/products/${dto.prodNo}|"><img width= 300px;
+				th:src="${dto.defImgUrl}"></a>
+		</div>
+		<div class="prods info" style="width: 300px;">
+			<p class="name"><a th:href="|/common/products/${dto.prodNo}|">[[${dto.prodName}]]</a></p>
+			<p><img id="heart" alt="wish" src="/images/icon/icons8-처럼-50.png" style="width: 25px; opacity: 0.5; cursor:pointer;">
+				<img alt="wish" src="/images/icon/icons8-쇼핑-카트-50.png" style="width: 25px; opacity: 0.5; cursor:pointer;"></p>
+			<p >
+				<span style="text-decoration: line-through; color: red;">[[${dto.price}]]원</span>
+				<span style="font-size: 15px; font-weight: bold;">[[${dto .price - dto.sale}]] 원</span>
+			</p>
+		</div>
+	</li>
+</ul>
+<p class="p-tit" style="margin-top: 70px;">BEST</p>
+<ul class="grid-container">
+	<li th:each="dto: ${bestList}" class="prods item">
+		<div class="prods img">
+			<a th:href="|/common/products/${dto.prodNo}|"><img width= 300px;
+				th:src="${dto.defImgUrl}"></a>
+		</div>
+		<div class="prods info"  style="width: 300px;">
+			<p class="name"><a th:href="|/common/products/${dto.prodNo}|">[[${dto.prodName}]]</a></p>
+			<p><img id="heart" alt="wish" src="/images/icon/icons8-처럼-50.png" style="width: 25px; opacity: 0.5; cursor:pointer;">
+				<img alt="wish" src="/images/icon/icons8-쇼핑-카트-50.png" style="width: 25px; opacity: 0.5; cursor:pointer;"></p>
+			<p >
+				<span style="text-decoration: line-through; color: red;">[[${dto.price}]]원</span>
+				<span style="font-size: 15px; font-weight: bold;">[[${dto .price - dto.sale}]] 원</span>
+			</p>
+		</div>
+	</li>
+</ul>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="~{layout/layout1 :: layout(~{::head}, ~{::main})}">
+<head>
+<link rel="stylesheet" href="/css/board/qnaList.css">
+<link rel="stylesheet" href="/css/board/list.css">
+<link rel="stylesheet" href="/css/common/reset.css">
+<link rel="stylesheet" href="/css/common/common.css">
+
+</head>
+<main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap">
+		<div>
+			<h2>Q&A</h2>
+			<p class="subT">자유로운 1:1 문의 게시판 입니다.</p>
+		</div>
+		<p sec:authorize="isAuthenticated()" class="btn-write"><a href="/qna/write">글쓰기</a></p>
+		<div class="bbs-table-list">
+			<table summary="No, content,Name,Data,Hits">
+				<caption>게시판</caption>
+				<colgroup>
+					<col width="70">
+					<col width="35">
+					<col width="640">
+					<col width="110">
+					<col width="110">
+					<col width="75">
+				</colgroup>
+				<thead>
+					<tr>
+						<th scope="col"><div class="tb-center">NO.</div></th>
+						<th scope="col"><div class="tb-center">&nbsp;</div></th>
+						<th scope="col"><div class="tb-center">CONTENT</div></th>
+						<th scope="col"><div class="tb-center">NAME</div></th>
+						<th scope="col"><div class="tb-center">DATE</div></th>
+						<th scope="col"><div class="tb-center">HITS</div></th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="dto : ${list}">
+						<td th:text="${dto.qnum}"><div class="tb-center">번호들어감</div></td>
+						<td><div class="tb-left">
+								<img src="/images/products/가디건1.jpg" style=" width: 80px; height: 80px;" >
+							</div></td>
+						<td>
+							<div class="tb-left">
+								<a href="/common/products/8">[크림 가디건]</a><br>
+								<img src="/images/icon/ㄴ.png"
+									style="padding-left: 00px; width: 10px; height: 10px;"><a th:href="|/qna/${dto.qnum}|" th:text="${dto.title}">제목이
+									들어갑니다</a><img src="/images/icon/new.png" style="width: 10px; height: 10px;">
+							</div>
+						</td>
+						<td  th:text="${dto.writer}"><div class="tb-center">작성자가 들어갑니다</div></td>
+						<td><div class="tb-center">
+						<div th:unless="${today eq dto.createdDate.toLocalDate()}" th:text="${#temporals.format(dto.createdDate, 'yyyy/MM/dd')}"></div>
+						<div th:if="${today eq dto.createdDate.toLocalDate()}"  th:text="${#temporals.format(dto.createdDate, 'HH:mm:ss')}"></div>
+						</div>
+						</td>
+						<td th:text="${dto.readCount}"><div class="tb-center">조회수가 들어갑니다</div></td>
+					</tr>
+				</tbody>
+			</table>
+			<div th:unless="${#lists.isEmpty(list)}">
+				<a th:if="${pi.start gt 1}" th:href="@{/qna/qnaList(pageNo=${pi.start-1})}"> 
+					<button type="button">&lt;</button>
+				</a>
+				<a th:each="pno : ${#numbers.sequence(pi.start,pi.end)}" th:href="@{/qna/qnaList(pageNo=${pno})}">
+					<button type="button">[[${pno}]]</button>
+				</a>
+				<a th:if="${pi.end lt pi.total}" th:href="@{/qna/qnaList(pageNo=${pi.end+1})}"> 
+					<button type="button">&gt;</button>
+				</a>
+				
+			</div>
+		</div>
+	</div>
+</main>
+</html>

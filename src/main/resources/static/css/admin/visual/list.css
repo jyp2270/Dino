@@ -1,0 +1,20 @@
+@charset "EUC-KR";
+
+#nav-v1 .menu-v1 a{
+	color: #fff;
+}
+
+#top a{
+	color: #fff;
+}
+#bottom a{
+	color: #fff;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+.wrap>.visual-write li{
+	width: 200px;
+	margin: 20px;
+}

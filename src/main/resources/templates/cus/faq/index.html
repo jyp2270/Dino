@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+th:replace="~{layout/layout1 :: layout(~{::head}, ~{::main})}">
+<head>
+	<link rel="stylesheet" href="/css/board/faqList.css">
+	<link rel="stylesheet" href="/css/board/list.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/common/common.css">
+    <script type="text/javascript">
+    	$(function(){
+    		$.get(
+    				"/faq/0",//url
+					function(result){
+						$("#data").html(result);
+					}//success
+    		);
+    		
+			$(".faq-menu>li").click(function(){
+				$.get(
+					"/faq/"+$(this).index(),//url
+					function(result){
+						$("#data").html(result);
+					}//success
+    			);
+			});
+    	});
+    </script>
+</head>
+<main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap">
+		<section class="content">
+			<h2>FAQ</h2>
+			
+			<div class="wrap veiw-size">
+			<p class="subT">고객센터 페이지 입니다.</p>
+			<div>
+				<p class="btn-write"><a href="/faq/write" sec:authorize="hasRole('ROLE_ADMIN')">글쓰기</a></p>
+			</div>
+				<ul class="faq-menu flex between">
+					<li>회원 및 멤버십</li>
+					<li>포인트</li>
+					<li>배송 및 환불</li>
+					<li>세탁 및 옷감 정보</li>
+				</ul>
+				<div id="data">
+				내용
+				</div>
+				
+			</div>
+			
+		</section>
+	</div>
+</main>
+</html>

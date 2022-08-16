@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{layout/layout1 :: layout(~{::head}, ~{::main})}">
+<head>
+    <link rel="stylesheet" href="/css/board/list.css">
+    <link rel="stylesheet" href="/css/common/reset.css">
+	<link rel="stylesheet" href="/css/common/common.css">
+</head>
+<main>
+	<h1>메인컨텐츠</h1>
+	<div class="wrap">
+		<div>
+		<h3>REVIEW</h3>
+		<p>사용 후기를 볼 수 있는 공간입니다.</p>
+		</div>
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<td>NO</td>
+						<td>제목</td>
+						<td>작성일</td>
+						<td>작성자</td>
+					</tr>
+				</thead>
+				<!-- <tbody>
+					<tr th:each="">
+						<td th:text="">글번호</td>
+						<td><a th:href="" th:text="">제목이들어가요</a></td>
+						<td th:text="">작성일</td>
+						<td th:text="">작성자</td>
+					</tr>
+					<tr th:if="">
+						<td colspan="5">게시글이 존재하지 않습니다.</td>
+					</tr>
+				</tbody>
+				 -->
+			</table>
+		</div>
+	</div>
+</main>
+</html>

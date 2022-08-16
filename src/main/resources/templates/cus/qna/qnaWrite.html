@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/layout1 :: layout(~{::head}, ~{::main})}">
+<head>
+	<link rel="stylesheet" href="/css/common/reset.css">
+	<link rel="stylesheet" href="/css/common/common.css">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- include summernote css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	<script src="/js/summernote.js"></script>
+</head>
+<body>
+	<main class="view-size">
+		<h1>Q&A작성</h1>
+		<div>
+			<form action="/qna/write" method="post">
+				<p>
+					<input type="text" name="title" placeholder="input title">
+				</p>
+				<p>
+					<textarea id="summernote" name="content"></textarea>
+				</p>
+				<p>
+					<input type="hidden" name="mno" th:value="${#authentication.principal.mno}">
+					<input type="hidden" th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" >
+					<button type="submit">등록</button>
+				</p>
+
+			</form>
+		</div>
+	</main>
+</body>
+</html>

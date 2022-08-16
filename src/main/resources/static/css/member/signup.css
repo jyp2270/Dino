@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+main>.wrap{
+   width: 580px;
+   padding: 100px 0;
+}
+#join-form ul li:nth-child(2){
+   margin-top: 5px;
+}
+#join-form ul li:not(:nth-child(2),:first-child){
+   margin-top: 20px;
+}
+#join-form ul li>div{
+   height: 50px;
+   line-height: 50px;
+}
+#join-form ul li>p{
+   padding-left: 130px;
+   font-size: 12px;
+}
+#join-form ul li label{
+   width: 110px;
+   display: inline-block;
+}
+#join-form ul li input{
+   width: 450px;
+   padding: 0.5em 1em;
+}
+#join-form ul li input::placeholder{
+   color: #8080ff;
+}
+#join-form ul li:last-child{
+   margin-top: 40px;
+}
+#join-form ul li button:disabled{
+   background-color: #888;
+   cursor: default;
+   opacity: 0.5;
+}
+#join-form ul li button {
+   width: 100%;
+   height: 60px;
+}
+#join-form ul li #email{
+   width: 370px;
+}
+#join-form ul li #btn-mail{
+   background-color: #c1d3fd;
+   color: #454545;
+   letter-spacing: 2px;
+   font-size: 12px;
+   font-weight: 600;
+   border-radius: 3px;
+   cursor: pointer;
+   width: 60px;
+   height: auto;
+   text-align: center;
+}
+#join-form ul li #key-wrap #key{
+   width: 370px;
+   margin-left: 130px;
+   margin-top: 4px;
+}
+#join-form ul li #key-wrap .time{
+   margin-left: 26px;
+   
+}
+#join-form ul li .mail-msg{
+	margin-left: 130px;
+	font-size: 12px;
+	}
+
+input:focus{
+   border:1px solid #0970a2; 
+   outline: none;
+}
+#join-form .comment {
+   font-size: 9px;
+}
+.simple-log{
+   margin-top: 40px;
+}
+.simple-log li a i{
+   background-repeat: no-repeat;
+   background-position: center;
+}
+.simple-log li:nth-of-type(1) a i{
+   background-image: url("../../images/common/sns_kakao.png");
+}
+.simple-log li:nth-of-type(2) a i{
+   background-image: url("../../images/common/sns_naver.png");
+}
+.simple-log li:nth-of-type(3) a i{
+   background-image: url("../../images/common/sns_google.png");
+}
+.simple-log li a{
+   font-size: 12px;
+   text-align: center;
+   display: block;
+}
+.simple-log li a i{
+   width: 60px;
+   height: 60px;
+   background-color: #e9e9e9;
+   border-radius:30px;
+   display: block; 
+}

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.flex{display: flex;}
+.row{flex-direction: row;}
+.column{flex-direction: column;}
+.center{justify-content: center;}
+.between{justify-content: space-between;}
+.around{justify-content: space-around;}
+.start{justify-content: flex-start;}
+.end{justify-content: flex-end;}
+
+.view-size{
+	width: 1024px;
+	margin: 0 auto;
+}
+
+.def-btn-style{
+	background-color: #c1d3fd;
+	color: #000000;
+	letter-spacing: 2px;
+	font-size: 18px;
+	font-weight: 700;
+	border-radius: 3px;
+	cursor: pointer;
+	margin-bottom: 100px;
+}
+.p-tit{
+	font-size: 25px;
+	font-weight: 700;
+	color: #3a3a3a; 
+	text-align: center;
+	margin-bottom: 50px;
+}

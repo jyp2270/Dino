@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{layout/layout-admin :: layout(~{::head}, ~{::main})}">
+<head>
+	<link rel="stylesheet" href="/css/admin/product/insertProduct.css">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- include summernote css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	<script src="/js/summernote.js"></script>
+	<script src="/js/fileUpload.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#catea").change(function(){
+				//console.log($(this).val());
+				$.ajax({
+					url:"/admin/category/"+$(this).val(),
+					type:"get",
+					success:function(result){
+						//console.log(cate2);
+						$("#cate2").html(result);
+					}
+				});
+			});
+			$("#cateb").change(function(){
+				//console.log($(this).val());
+				$.ajax({
+					url:"/admin/category/"+$(this).val(),
+					type:"get",
+					success:function(result){
+						//console.log(cate2);
+						$("#cate3").html(result);
+					}
+				});
+			});
+		});
+	</script>
+	
+</head>
+<main>
+	<h1>상품 등록</h1>
+	<div class="wrap">
+		<section id="prod-reg">
+		<h1>상품등록</h1>
+			<div class="wrap">
+			<p>상품 등록</p>
+			<form action="/admin/products" method="post">
+				<ul>
+					<li>
+						<div>
+						<label>카테고리 등록</label>
+						</div>
+						<div>
+						<select id="catea">
+							<option>1차 카테고리</option>
+							<th:block th:each ="ca : ${cateA}">
+							<option th:value="${ca.code}">[[${ca.koName}]]</option>
+							</th:block>
+						</select>
+						</div>
+						<span id="cate2"></span>
+						<div>
+						<select id="cateb">
+							<option>1차 카테고리</option>
+							<th:block th:each ="ca : ${cateA}">
+							<option th:value="${ca.code}">[[${ca.koName}]]</option>
+							</th:block>
+						</select>
+						<div>
+						<span id="cate3"></span>
+						</div>
+						</div>
+					</li>		
+					<li>
+						<div>
+						<label>상품명</label>
+						</div>
+						<div>
+						<input type="text" name="prodName" placeholder="상품명">
+						</div>
+					</li>
+					<li>
+						<div>
+						<label>판매가격</label>
+						</div>
+						<div>
+						<input type="text" name="price" placeholder="판매가격">
+						</div>
+					</li>
+					<li>
+						<div>
+						<label>할인</label>
+						</div>
+						<div>
+						<input type="text" name="sale" placeholder="숫자만 입력">
+						<select name="isRate">
+							<option value="on">원</option>
+							<option value="off">%</option>
+						</select>
+						</div>
+					</li>
+					<li>
+						<div>
+						<label>재고수량</label>
+						</div>
+						<div>
+						<input type="text" name="stock" placeholder="재고">
+						</div>
+					</li>
+					<li>
+						<div>
+						<p>상품이미지</p>
+						</div>
+						<div>
+							<label>대표이미지</label>
+							<input type="file" id="defImg" class="fileInput">
+							<label for="defImg">+</label>
+							<input type="hidden" name ="defImgName">
+						</div>
+						<div>
+							<label>추가이미지</label>
+							<input type="file" id="addImg" class="fileInput">
+							<label for="addImg">+</label>
+							<input type="hidden" name ="addImgName">
+						</div>
+						
+					</li>
+					<li>
+						<div>
+						<label>상세설명</label>
+						</div>
+						<div>
+						<textarea id="summernote" name="content"></textarea>
+						</div>
+					</li>
+					<li>
+						<div>
+						<input type="hidden" th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" >
+						<button type="submit">등록</button>
+						</div>
+					</li>
+				</ul>
+			</form>
+			</div>
+		</section>
+	</div>
+</main>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:fragment="layout(head, main)">
+<head>
+<title>DinoJi</title>
+<meta name="_csrf" th:content="${_csrf.token}" />
+<!-- default header name is X-CSRF-TOKEN -->
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<!-- 공통적용할 css -->
+<link rel="shortcut icon" href="/images/icon/코끼리이.ico">
+<link rel="stylesheet" href="/css/common/reset.css">
+<link rel="stylesheet" href="/css/common/common.css">
+<link rel="stylesheet" href="/css/common/header.css">
+<link rel="stylesheet" href="/css/common/footer.css">
+<!-- summernote css/js -->
+
+<th:block th:replace="${head}">page에서 설정한 head정보가 삽입되요</th:block>
+<script type="text/javascript" src="/js/pg.js"></script>
+
+</head>
+<body>
+	<header>
+		<div class="wrap">
+			<section id="hc">
+				<h1>로고</h1>
+				<div class="wrap flex">
+				<!-- <div style="font-size:50px;">Dinoji<br>(힝속앗지)</div> -->
+				<a href="/"><img id="logo" alt="(☞ﾟヮﾟ)☞(☞ﾟヮﾟ)☞" src="/images/DinoJiColor.jpg" style="width: 160px; height: 55px;"></a>
+				</div>
+			</section>
+			<section id="ht">
+				<h1>헤더 상단</h1>
+				<div class="wrap flex between">
+					<section id="htl">
+						<h1>메뉴</h1>
+						<div class="wrap flex between">
+							<ul class="flex">
+								<li><a href="/faq">FAQ</a></li>
+								<li><a href="#">NOTICE</a></li>
+								<li><a href="#">REVIEW</a></li>
+								<li><a href="/qna/qnaList">Q&A</a></li>
+							</ul>
+						</div>
+					</section>
+					<section id="htr">
+						<h1>유저메뉴</h1>
+						<div class="wrap">
+							<ul class="flex">
+								<li sec:authorize="isAnonymous()"><a href="/signin">LOGIN</a></li>
+								<li sec:authorize="isAuthenticated()">
+									<span sec:authentication="principal.name"></span>
+									<button id="btn-logout">LOGOUT</button></li>
+								<li sec:authorize="isAnonymous()"><a href="/common/signup">JOIN US</a></li>
+								<li sec:authorize="hasRole('ROLE_ADMIN')"><a
+									href="/admin/home">ADMIN PAGE</a></li>
+								<li><a href="/member/carts">SHOPPING CART</a></li>
+								<li><a href="#">ORDER</a></li>
+								<li><a href="#">MY PAGE</a></li>
+								<form>
+									<input type="search" placeholder="검색">
+								</form>
+							</ul>
+						</div>
+					</section>
+					<script type="text/javascript">
+						$(function() {
+							$("#btn-logout").click(function() {
+
+							var token = $("meta[name='_csrf']").attr("content");
+							var header = $("meta[name='_csrf_header']").attr("content");
+
+							$.ajax({
+								beforeSend : function(xhr) {xhr.setRequestHeader(header,token);},
+								url : "/logout",
+								type : "post",
+								success : function() {
+									location.href = "/";
+								}
+							});
+						});
+					});
+					</script>
+				</div>
+			</section>
+			<section id="hb">
+				<h1>헤더하단</h1>
+				<div class="menu1 wrap">
+					<ul class="main flex between">
+						<li id="gnb-menu" class="s-m"><a href="#" class="flex">
+							<span id="gnb" class="flex column center">
+							<span> 
+								<i></i><i></i><i></i>
+							</span>
+							</span> 
+							<span class="all-i">전체상품 보기</span></a>
+							<div class="menu2 flex" >
+								<ul class="sub">
+									<p>OUTER</p>
+									<li><a href="/common/categories/1601/products">자켓</a></li>
+									<li><a href="/common/categories/1602/products">코트</a></li>
+									<li><a href="/common/categories/1603/products">가디건</a></li>
+								</ul>
+								<ul class="sub">
+									<p>TOP</p>
+									<li><a href="/common/categories/1701/products">bl&sh</a></li>
+									<li><a href="/common/categories/1702/products">티셔츠</a></li>
+								</ul>
+								<ul class="sub">
+									<p>BOTTOM</p>
+									<li><a href="/common/categories/1801/products">LONG</a></li>
+									<li><a href="/common/categories/1802/products">SHORT</a></li>
+								</ul>
+								<ul class="sub">
+									<p>OPS</p>
+									<li><a href="/common/categories/1901/products">LONG</a></li>
+									<li><a href="/common/categories/1902/products">MID</a></li>
+									<li><a href="/common/categories/1903/products">SHORT</a></li>
+								</ul>
+								<ul class="sub">
+									<p>SKIRT</p>
+									<li><a href="/common/categories/2001/products">LONG</a></li>
+									<li><a href="/common/categories/2002/products">MID</a></li>
+									<li><a href="/common/categories/2003/products">SHORT</a></li>
+								</ul>
+								<ul class="sub">
+									<p>ACC&BAG</p>
+									<li><a href="/common/categories/2101/products">ACC</a></li>
+									<li><a href="/common/categories/2102/products">BAG</a></li>
+								</ul>
+								<ul class="sub">
+									<p>SHOES</p>
+									<li><a href="/common/categories/2201/products">RUNNING SHOE</a></li>
+									<li><a href="/common/categories/2202/products">LOAFER, WALKER</a></li>
+									<li><a href="/common/categories/2203/products">BOOTS,HEEL</a></li>
+									<li><a href="/common/categories/2204/products">SRIPPER, SANDAL</a></li>
+								</ul>
+							</div>
+						</li>
+						<li><a href="/common/categories/1100/products">NEW</a></li>
+						<li><a href="/common/categories/1200/products">BEST</a></li>
+						<li><a href="/common/categories/1300/products">코디set</a></li>
+						<li><a href="/common/categories/1400/products">1+1</a></li>
+						<li><a href="/common/categories/1500/products">SUMMER</a></li>
+						<li><a href="/common/categories/1600/products">OUTER</a></li>
+						<li><a href="/common/categories/1700/products">TOP</a></li>
+						<li><a href="/common/categories/1800/products">BOTTOM</a></li>
+						<li><a href="/common/categories/1900/products">OPS</a></li>
+						<li><a href="/common/categories/2000/products">SKIRT</a></li>
+						<li><a href="/common/categories/2100/products">ACC&BAG</a></li>
+						<li><a href="/common/categories/2200/products">SHOES</a></li>
+						<li><a href="/common/categories/2300/products">SALE</a></li>
+						<li><a href="/common/categories/2400/products">ROCKET</a></li>
+					</ul>
+				</div>
+			</section>
+		</div>
+
+	</header>
+	<main th:replace="${main}">메인섹션이 삽입되는 영역입니다.</main>
+	<footer>
+		<h1>하단영역</h1>
+		<div class="wrap ">
+			<!-- //////////////////////////////////////////////// -->
+			<nav id="fnb">
+				<h1>하단메뉴</h1>
+				<div class="wrap view-size flex column center">
+					<ul class="flex around">
+						<li><a href="#">회사소개</a></li>
+						<li><a href="#">모델정보</a></li>
+						<li><a href="#">약관 및 정책</a></li>
+						<li class="terms"><a href="#">개인정보 취급방침</a></li>
+						<li><a href="#">이용안내</a></li>
+						<li><a href="#">제휴문의</a></li>
+						<li><a href="#">인재채용</a></li>
+					</ul>
+				</div>
+			</nav>
+			<!-- //////////////////////////////////////////////// -->
+			<!-- //////////////////////////////////////////////// -->
+			<div id="cus">
+				<!-- 엔티티코드 & : &amp; 공백:&nbsp;-->
+				<h1>고객센터&nbsp;&amp;&nbsp;SNS</h1>
+				<div class="wrap view-size flex between">
+					<ul class="fm flex view-size between">
+						<li id="center">
+							<h3>CUSTOMER CENTER</h3>
+							<p id="tel">
+								<a href="tel:01012345678">010-1234-5678</a>
+							</p>
+							<p>mon-thu 10:00 ~ 16:00 fri-sun,holiday OFF</p>
+						</li>
+						<li id="bank">
+							<h3>ACCOUNT INFO</h3>
+							<p>BANK INFO</p>
+							<p>우리은행 1002-756-709277</p>
+							<p>박지윤(디질래?)</p>
+						</li>
+						<li id="return" class="column">
+							<h3>RETURN / EXCHANGE</h3>
+							<p>태양시 하늘로 722-1 적운 2층 207호 디노지 앞</p>
+							<p>자세한 교환.반품절차 안내는 문의란 및 공지사항을 참고해주세요</p>
+						</li>
+						<li id="sns">
+							<h3>SNS</h3>
+							<ul class="flex">
+								<li>
+									<a href="https://www.instagram.com/jiy_gwisin_uee/"><img
+									src="/images/common/insta.png" alt="INSTAGRAM" style="width: 20px; height:20px;">DinoJi</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- //////////////////////////////////////////////// -->
+			<!-- //////////////////////////////////////////////// -->
+			<section id="com">
+				<h1>회사정보</h1>
+				<div class="wrap view-size">
+					<div class="com-info">
+						<dl class="flex">
+							<dt>태양 사무소</dt>
+							<dd>
+								<address>태양시 하늘로 722-1 적운 2층 207호 디노지</address>
+							</dd>
+						</dl>
+						<dl class="flex">
+							<dt>본사</dt>
+							<dd>
+								<address>태양시 하늘로 722-1 적운 2층 207호 디노지</address>
+							</dd>
+						</dl>
+						<dl class="flex">
+							<dt>COMPANY</dt>
+							<dd>DinoJi</dd>
+							<dt>OWNER</dt>
+							<dd>박지윤</dd>
+							<dt>BUSINESS LICENSE</dt>
+							<dd>123-88-98765</dd>
+							<dt>MALL--ORDER LICENSE</dt>
+							<dd>제2022-노원-9999</dd>
+						</dl>
+					</div>
+					<div class="copy">Copyright &copy; 디노지 Coding Corp. All
+						Rights Reserved.</div>
+				</div>
+			</section>
+			<!-- //////////////////////////////////////////////// -->
+		</div>
+	</footer>
+	
+</body>
+</html>

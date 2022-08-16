@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.grid-container {
+	width: 1300px;
+	margin: auto;
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	gap: 20px;
+	padding:20px; 
+}
+
+.img {
+	font-size: 0;
+}
+
+.info {
+	padding: 25px;
+	font-size: 13px;
+	background-color: rgba(0, 0, 0, 0.05);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.name {
+	font-size: 15px;
+	padding-bottom: 16px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	height: 70px;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+.wrap td{
+	padding: 5px;
+	text-align: center;
+}

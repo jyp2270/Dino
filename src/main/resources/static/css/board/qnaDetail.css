@@ -1,0 +1,83 @@
+@charset "UTF-8";
+#detail-view{
+	width: 100%;
+}
+#detail-view tr{
+	height: 40px;
+}
+#detail-view th{
+	width: 20%;
+	margin: auto;
+	border: 2px solid #dfdfdf;
+	padding: 5px 10px;
+}
+
+#detail-view td{
+	padding: 5px 10px;
+	width: 80%;
+	display: table-cell;
+	margin: auto;
+	border: 2px solid #dfdfdf;
+}
+
+#edit-form{
+	width: 100%;
+}
+#edit-form tr{
+	height: 40px;
+}
+#edit-form th{
+	width: 20%;
+	margin: auto;
+	border: 2px solid #dfdfdf;
+	padding: 5px 10px;
+}
+
+#edit-form td{
+	padding: 5px 10px;
+	width: 80%;
+	display: table-cell;
+	margin: auto;
+	border: 2px solid #dfdfdf;
+}
+
+#reply{
+	width: 90%;
+	padding: 10px;
+	background-color: #dfdfdf;
+	border: none;
+	margin-right: 10px;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+#btn-re{
+	width: 8%;
+	border: 1px solid #dfdfdf;
+	padding: 5px 9px;
+}
+#reply-view tr{
+	height: 40px;
+	width: 100%;
+	
+}
+#reply-view td{
+	padding: 5px 10px;
+	display: table-cell;
+	margin: auto;
+	border: 2px solid #dfdfdf;
+}
+#rno{
+	width: 5%;
+	text-align: center;
+}
+#re{
+	width: 80%;
+}
+#rdate{
+	width: 10%;
+	
+}
+#replier{
+	width: 10%;
+	text-align: center;
+}

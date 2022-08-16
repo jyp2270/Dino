@@ -1,0 +1,13 @@
+@charset "UTF-8";
+*{margin: 0;padding: 0; box-sizing: border-box;
+}
+h1{position: absolute; left: -9999px;}
+li{list-style: none;}
+a{text-decoration: none;}
+button{border: none;background-color: transparent;}
+address{font-style: normal;}
+
+.view-size{
+	width: 1024px;
+	margin: 0 auto;
+}

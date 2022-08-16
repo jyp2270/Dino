@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/layout-admin :: layout(~{::head}, ~{::main})}">
+<head>
+<link rel="stylesheet" href="/css/admin/product/prodList.css">
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet"> <script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- include summernote css/js --> <link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet"> <script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="/js/summernote.js"></script> <script
+	src="/js/fileUpload.js"></script>
+</head>
+<main>
+	<h1>상품 리스트페이지</h1>
+	<div class="wrap">
+		<section id="prod-reg">
+			<h1>상품 리스트</h1>
+			<div class="wrap">
+				<p>상품 리스트</p>
+				<table>
+					<thead>
+						<tr>
+							<td>관리번호</td>
+							<td>이미지</td>
+							<td>상품명</td>
+							<td>가격</td>
+							<td>할인</td>
+							<td>재고</td>
+							<td>적용여부</td>
+							<td>관리</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="dto, i:${list}" class="item">
+							<td class="prodNo">[[${dto.prodNo}]]</td>
+							<td><img alt="이미지" height="200px" th:src="${dto.defImgUrl}">
+							</td>
+							<td><input type="text" class="prodName"
+								th:value="${dto.prodName}" readonly></td>
+							<td><input type="text" class="price" th:value="${dto.price}"
+								readonly></td>
+							<td><input type="text" class="sale" th:value="${dto.sale}"
+								readonly></td>
+							<td><input type="text" class="stock" th:value="${dto.stock}"
+								readonly></td>
+							<td><label th:for="|cb-isShow-${i.count}|">적용 됨</label> <input
+								th:id="|cb-isShow-${i.count}|" class="cb-isShow" type="checkbox"
+								th:checked="${dto.isShow}"></td>
+							<td>
+								<button type="button" class="btn-del">삭제</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<script type="text/javascript">
+			$(function() {
+				$(".btn-del").click(function() {
+					var prodNo = $(this).parents(".item").find(".prodNo").text();
+					var token = $("meta[name='_csrf']").attr("content");
+					var header = $("meta[name='_csrf_header']").attr("content");
+					$.ajax({
+						beforeSend : function(xhr) {xhr.setRequestHeader(header, token);},
+						url : "/admin/products/"+ prodNo,
+						type : "delete",
+						success : function(result) {
+							if (result) {
+								location.href = "/admin/products";
+							}
+						}
+					});
+				});
+
+				$(".price,.sale,.stock,.prodName").focus(function() {
+					$(this).removeAttr("readonly");
+				});
+				$(".price,.sale,.stock,.prodName").blur(function() {
+					$(this).attr("readonly", true);
+				});
+
+				$(".price, .sale,.stock,.prodName").change(function() {
+					var prodNo = $(this).parents(".item").find(".prodNo").text();
+
+					var sale = $(this).parents(".item").find(".sale").val();
+					var price = $(this).parents(".item").find(".price").val();//$(this).val()
+					var stock = $(this).parents(".item").find(".stock").val();
+					var prodName = $(this).parents(".item").find(".prodName").val();
+
+					var token = $("meta[name='_csrf']").attr("content");
+					var header = $("meta[name='_csrf_header']").attr("content");
+					$.ajax({
+						beforeSend : function(xhr) {xhr.setRequestHeader(header, token);},
+						url : "/admin/products/"+ prodNo,
+						type : "put",
+						data : {"price" : price,sale : sale,prodName : prodName,stock : stock},
+						success : function(result) {
+							if (result) {
+								alert("수정완료");
+							}
+						}
+					});
+				});
+
+				$(".cb-isShow").change(function() {
+					//alert($(this).attr("checked"));
+					var prodNo = $(this).parents("tr").find(".prodNo").text();
+					var isShow = $(this).prop("checked");//true or false
+
+					var token = $("meta[name='_csrf']").attr("content");
+					var header = $("meta[name='_csrf_header']").attr("content");
+					$.ajax({
+						beforeSend : function(xhr) {xhr.setRequestHeader(header, token);},
+						url : "/admin/products/"+ prodNo + "/isShow",
+						type : "put",
+						data : {"isShow" : isShow},
+						success : function(result) {
+							if (result) {
+								alert("수정완료");
+							}
+						}
+					});
+				});
+			});
+		</script>
+			</div>
+		</section>
+		
+	</div>
+</main>
+</html>

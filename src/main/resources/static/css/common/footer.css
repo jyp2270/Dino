@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+footer>.wrap{
+	padding: 40px 0 80px;
+}
+
+#fnb{
+	font-size: 11px;
+	border-top: 1px solid #a9a9a9;
+	border-bottom: 1px solid #a9a9a9;
+	
+}
+#fnb>.wrap{
+	height: 50px;
+}
+
+#fnb>.wrap ul li{
+	flex: 1;
+	text-align: center;
+}
+/* 마지막 li태그는 제외하고 적용 */
+#fnb>.wrap ul li:not(:last-child){
+	border-right: 1px solid #d9d9d9;
+}
+#fnb>.wrap ul li:nth-child(3){
+	flex: 1.2;
+}
+#fnb>.wrap ul li.terms{
+	flex: 1.5;
+}
+#fnb>.wrap ul li.terms a{
+	color: rgb(44, 44, 44);
+}
+#cus>.wrap ul.fm {
+	padding-top: 30px;
+}
+#cus>.wrap ul li{
+	font-size: 10px;
+}
+
+#cus>.wrap ul li h3{
+	margin-bottom: 17px; 
+}
+
+#center>.wrap ul li.tel{
+	font-weight: 900;
+}
+#center>.wrap ul li.tel{
+	font-size: 20px;
+}
+#center>.wrap dl.work{
+	position: relative;	
+	top: 50px;
+	left: 10px;
+	height: 22px;
+	color: #333;
+}
+#center>.wrap dl.work dt{
+	color: #888;
+	margin-left: 10px;
+}
+
+#ins-banking li{
+	margin-top: 0;
+}
+#com{
+	margin-top: 30px;
+}
+#com>.wrap{
+	font-size: 11px;
+	color: #888;
+}
+#com>.wrap dl:not(:last-child) dt::after{
+	content: ":";
+	margin: 0 10px;
+}
+#com>.wrap dl:last-child dd{
+	color: #333;
+	margin: 0 1em 0 0.5em;
+}
+#com>.wrap .copy{
+	margin-top: 30px;
+}

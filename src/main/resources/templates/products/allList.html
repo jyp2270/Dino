@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+th:replace="~{layout/layout1 :: layout(~{::head}, ~{::main})}">
+<head>
+	<link rel="stylesheet" href="/css/admin/product/prodList.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script type="text/javascript" src="/js/visual.js"></script>
+    <script type="text/javascript" src="/js/prodList.js"></script>
+</head>
+<body>
+<main>
+	<section id="prod-list">
+			<h1>상품 리스트</h1>
+			<div class="wrap"></div>
+			<pre id="footer">
+			</pre>
+	</section>
+	<div class="quickmenu">
+	  <ul>
+	    <li><a href="/member/carts">장바구니</a></li>
+	    <li><a href="#">관심상품</a></li>
+	    <li><a href="#">마이페이지</a></li>
+	    <li><a href="/faq">FAQ</a></li>
+	    <li><a href="/qna/qnaList">Q&A</a></li>
+	    <li><a href="#">NOTICE</a></li>
+	    <li><a href="#"><img alt="up" src="/images/icon/icons8-셰브론-최대-24.png"></a></li>
+	    <li><a href="#footer"><img alt="down" src="/images/icon/icons8-셰브론-아래로-24.png"></a></li>
+	  </ul>
+	  <script type="text/javascript">
+	  	$(document).ready(function(){
+  			var currentPosition = parseInt($(".quickmenu").css("top"));
+ 			 $(window).scroll(function() {
+    			var position = $(window).scrollTop(); 
+   				 $(".quickmenu").stop().animate({"top":position+currentPosition+"px"},1000);
+  			});
+		});
+	  </script>
+	</div>
+</main>
+</body>
+</html>

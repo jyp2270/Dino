@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/layout1 :: layout(~{::head}, ~{::main})}">
+<head>
+	<link rel="stylesheet" href="/css/common/reset.css">
+	<link rel="stylesheet" href="/css/common/common.css">
+</head>
+<body>
+	<main class="view-size">
+		<h1>FAQ 글쓰기</h1>
+		<div>
+			<form action="/faq/write" method="post">
+				<p>
+					<input type="text" name="question" placeholder="질문 입력">
+					<img alt="down" src="/images/icon/write.png" id="btn-down">
+				</p>
+				<p>
+					<input type="text" name="content" placeholder="답변 입력">
+				</p>
+				<p>
+					<input type="hidden" th:name="${_csrf.parameterName}"  th:value="${_csrf.token}" >
+					<button type="submit">등록</button>
+				</p>
+			</form>
+		</div>
+		
+	</main>
+</body>
+</html>
